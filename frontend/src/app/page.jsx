@@ -30,14 +30,21 @@ const Home = () => {
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
         className="mySwiper"
+        style={{ height: '600px' }}
       >
-        <SwiperSlide className=''>
-          <img src="https://thumbs.dreamstime.com/z/kolesnikov-evgeny-21650495.jpg?ct=jpeg" alt=""  />
+        <SwiperSlide >
+          <div>
+            
+          <img src="https://www.adityabirlacapital.com/healthinsurance/active-together/wp-content/uploads/2023/09/Sports-1.jpg" alt=""  />
+          
+          </div>
         </SwiperSlide>
         <SwiperSlide>
-        Slide 2
+        <img src="https://assets-global.website-files.com/5e2b8863ba7fff8df8949888/65b013746d9578f721ca5624_5e28eafb0ab615627351134c_too-late-blog.jpeg" alt="" />
         </SwiperSlide>
-        <SwiperSlide>Slide 3</SwiperSlide>
+        <SwiperSlide>
+          <img src="https://www.interkultur.com/fileadmin/_processed_/6/f/csm_N-1-20230222-JonasPersson_f7813905d9.jpg" alt="" />
+        </SwiperSlide>
         
       </Swiper>
     </>

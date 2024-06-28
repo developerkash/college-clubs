@@ -43,26 +43,25 @@ const Signup = () => {
   return (
     <>
       {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
-      <div className="min-h-screen  bg-red-100 text-gray-900 flex justify-center" style={{backgroundColor: '#9A616D'}}> 
+      <div
+        className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
+      >
         <div className="max-w-screen-xl  mb-10 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
           {/* first division containing form */}
           <div className=" xl:w-6/12 p-6 sm:p-12">
             <div>
-              <img
-                src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-                className="w-32 mx-auto"
-              />
+              <img src="Design.jpg" className="w-16 mx-auto" />
             </div>
 
-            <h1 className="mt-5 text-2xl font-bold text-center">
-              Sign up with:
+            <h1 className="mt- text-2xl font-bold text-center">
+              Sign in with:
             </h1>
 
             <form onSubmit={adduser.handleSubmit}>
               <div className="text-center mb-3">
                 <button
                   type="button"
-                  className="btn btn-link btn-floating mx-1"
+                  className="text-blue-700 btn btn-link btn-floating mx-1"
                 >
                   <i className="fab fa-facebook-f" />
                 </button>
@@ -109,17 +108,18 @@ const Signup = () => {
                       autoComplete="given-name"
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                        {
-                          adduser.touched.first_name && 
-                          <small className='text-red-500'>{adduser.errors.first_name}</small>
-                        }
+                    {adduser.touched.first_name && (
+                      <small className="text-red-500">
+                        {adduser.errors.first_name}
+                      </small>
+                    )}
                   </div>
                 </div>
                 <div>
                   <label
                     htmlFor="last_name"
                     className="block text-sm font-semibold leading-6 text-gray-900"
-                    >
+                  >
                     Last name
                   </label>
                   <div className="mt-2.5">
@@ -131,12 +131,12 @@ const Signup = () => {
                       value={adduser.values.last_name}
                       autoComplete="family-name"
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      />
-                        {
-                          adduser.touched.last_name && 
-                          <small className='text-red-500'>{adduser.errors.last_name}</small>
-                        }
-                    
+                    />
+                    {adduser.touched.last_name && (
+                      <small className="text-red-500">
+                        {adduser.errors.last_name}
+                      </small>
+                    )}
                   </div>
                 </div>
               </div>
@@ -161,10 +161,11 @@ const Signup = () => {
                       onChange={adduser.handleChange}
                       value={adduser.values.email}
                     />
-                    {
-                          adduser.touched.email && 
-                          <small className='text-red-500'>{adduser.errors.email}</small>
-                        }
+                    {adduser.touched.email && (
+                      <small className="text-red-500">
+                        {adduser.errors.email}
+                      </small>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -184,10 +185,11 @@ const Signup = () => {
                       autoComplete="tel"
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                    {
-                          adduser.touched.contact && 
-                          <small className='text-red-500'>{adduser.errors.contact}</small>
-                        }
+                    {adduser.touched.contact && (
+                      <small className="text-red-500">
+                        {adduser.errors.contact}
+                      </small>
+                    )}
                   </div>
                 </div>
               </div>
@@ -211,10 +213,11 @@ const Signup = () => {
                       onChange={adduser.handleChange}
                       value={adduser.values.password}
                     />
-                    {
-                          adduser.touched.password && 
-                          <small className='text-red-500'>{adduser.errors.password}</small>
-                        }
+                    {adduser.touched.password && (
+                      <small className="text-red-500">
+                        {adduser.errors.password}
+                      </small>
+                    )}
                   </div>
                 </div>
                 <div>
@@ -234,12 +237,35 @@ const Signup = () => {
                       onChange={adduser.handleChange}
                       value={adduser.values.confirm_password}
                     />
-                    {
-                          adduser.touched.confirm_password && 
-                          <small className='text-red-500'>{adduser.errors.confirm_password}</small>
-                        }
+                    {adduser.touched.confirm_password && (
+                      <small className="text-red-500">
+                        {adduser.errors.confirm_password}
+                      </small>
+                    )}
                   </div>
                 </div>
+                <div className=" flex items-center">
+  <div className="flex">
+    <input
+      id="remember-me"
+      name="remember-me"
+      type="checkbox"
+      className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+    />
+  </div>
+  <div className="ms-3">
+    <label htmlFor="remember-me" className="text-sm dark:text-white">
+      I accept the{" "}
+      <a
+        className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+        href="#"
+      >
+        Terms and Conditions
+      </a>
+    </label>
+  </div>
+</div>
+
               </div>
               <div className="mt-5">
                 <button
@@ -261,7 +287,7 @@ const Signup = () => {
 
           {/* second division containing BackgroundImage */}
           <div className="flex-1 bg-indigo-100 text-center  lg:flex">
-            <img src="https://i.pinimg.com/originals/34/ad/1c/34ad1c2bbf283d9e8c16cf50484f8db0.jpg"/>
+            <img src="https://i.pinimg.com/originals/34/ad/1c/34ad1c2bbf283d9e8c16cf50484f8db0.jpg" />
           </div>
           {/* End of secnd division */}
         </div>

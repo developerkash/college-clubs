@@ -36,16 +36,15 @@ const Login = () => {
     <>
       {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
       <div
-        className="min-h-screen  bg-red-100 text-gray-900 flex justify-center"
-        style={{ backgroundColor: "#9A616D" }}
+        className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
       >
         <div className="max-w-screen-xl  mb-10 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
           {/* first division containing form */}
           <div className=" xl:w-6/12 p-6 sm:p-12">
             <div>
               <img
-                src="https://storage.googleapis.com/devitary-image-host.appspot.com/15846435184459982716-LogoMakr_7POjrN.png"
-                className="w-32 mx-auto"
+                src="Design.jpg"
+                className="w-16 mx-auto"
               />
             </div>
 
@@ -187,7 +186,7 @@ const Login = () => {
           {/* End of first division */}
 
           {/* second division containing Image */}
-          <div className="flex-1 bg-indigo-100 text-center  lg:flex">
+          <div className="flex-1 bg-indigo-100 text-center h-full  lg:flex">
             <img src="https://i.pinimg.com/originals/34/ad/1c/34ad1c2bbf283d9e8c16cf50484f8db0.jpg" />
           </div>
           {/* End of secnd division */}
