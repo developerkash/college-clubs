@@ -9,12 +9,8 @@ const Login = () => {
     email: Yup.string().email("Invalid email").required("Required"),
 
     password: Yup.string()
-      .min(8, "Password is too short - should be 8 chars minimum.")
-      .required("Required")
-      .matches(/[a-z]/, "password must contain 1 lowercase letter")
-      .matches(/[A-Z]/, "password must contain 1 uppercase letter")
-      .matches(/[0-9]/, "password must contain 1 number")
-      .matches(/[\w]/, "password must contain 1 special case letter"),
+      .required("Required"),
+      
 
     remember: Yup.string().required("Required"),
   });
@@ -33,27 +29,29 @@ const Login = () => {
   });
 
   return (
-    <>
-      {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
-      <div
-        className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
-      >
-        <div className="max-w-screen-xl  mb-10 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-          {/* first division containing form */}
-          <div className=" xl:w-6/12 p-6 sm:p-12">
-            <div>
-              <img
-                src="Design.jpg"
-                className="w-16 mx-auto"
-              />
-            </div>
+    <div
+      className="
+                    xl:h-screen lg:h-screen md:h-screen sm:h-screen  2xl:h-screen
+                    bg-indigo-50  flex  justify-center"
+    >
+      <div className="max-h-full  md:mt-24 sm:mt-32 lg:m-32  text-black  flex justify-center w-full  ">
+        <div className="w-5/12">
+          <img
+            src="https://i.pinimg.com/564x/10/90/6c/10906cb2e6ada9bdd6c465f5242ad255.jpg"
+            alt=""
+            className="h-full"
+          />
+        </div>
+        <div className="w-7/12 bg-white">
+        <div className="mx-5">
+            
 
-            <h1 className="mt-5 text-2xl font-bold text-center">
+            <h1 className=" text-2xl font-bold text-center">
               Sign in with:
             </h1>
 
             {/* Form */}
-            <form>
+            <form onSubmit={loginuser.handleSubmit}>
               <div className="text-center mb-3">
                 <button
                   type="button"
@@ -101,7 +99,15 @@ const Login = () => {
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       required=""
                       aria-describedby="email-error"
+                      onChange={loginuser.handleChange}
+                      value={loginuser.values.email}
                     />
+                    {/* Error Message */}
+                    {loginuser.touched.email && (
+                      <small className="text-red-500">
+                        {loginuser.errors.email}
+                      </small>
+                    )}
                   </div>
                 </div>
                 {/* End Form Group */}
@@ -130,7 +136,15 @@ const Login = () => {
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                       required=""
                       aria-describedby="password-error"
+                      onChange={loginuser.handleChange}
+                      value={loginuser.values.password}
                     />
+                    {/* Error Message */}
+                    {loginuser.touched.password && (
+                      <small className="text-red-500">
+                        {loginuser.errors.password}
+                      </small>
+                    )} 
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
                         className="size-5 text-red-500"
@@ -176,23 +190,16 @@ const Login = () => {
               </div>
             </form>
             {/* End Form */}
-            <div className="mt-1 text-center font-bold">
+            <div className="mt-3 text-center font-bold">
               Don't have an account yet?
               <a href="/signup" className="text-blue-500 hover:text-blue-700">
                 Sign up here
               </a>
             </div>
           </div>
-          {/* End of first division */}
-
-          {/* second division containing Image */}
-          <div className="flex-1 bg-indigo-100 text-center h-full  lg:flex">
-            <img src="https://i.pinimg.com/originals/34/ad/1c/34ad1c2bbf283d9e8c16cf50484f8db0.jpg" />
-          </div>
-          {/* End of secnd division */}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

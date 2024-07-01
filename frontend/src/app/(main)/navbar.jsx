@@ -1,93 +1,111 @@
-import Link from 'next/link';
-import React from 'react'
+import Link from "next/link";
+import React from "react";
+
 
 const Navbar = () => {
   return (
-    <div>
-      <>
-  {/* ========== HEADER ========== */}
-  <>
-  {/* component */}
-  <nav className=" shadow shadow-gray-300 w-100 px-8 md:px-auto">
-    <div className="md:h-16 h-28 mx-auto md:px-4 container flex items-center justify-between flex-wrap md:flex-nowrap">
-      {/* Logo */}
-      <div className="text-indigo-900 w-20  md:order-1">
-      <img className='' src="Design.jpg" alt="" />
-      </div>
-      <div className="text-gray-500 order-3 w-full md:w-auto md:order-2">
-        <ul className="flex font-semibold justify-between">
-        <Link href="/"> 
-          <li className="md:px-4 hover:text-indigo-400 md:py-2 text-indigo-700">
-            Dashboard
-          </li>
-        </Link> 
-        <Link href="/about">
-          <li className="md:px-4 md:py-2 text-indigo-700  hover:text-indigo-400">
-            About
-          </li>
-        </Link>
-        <Link href="/contact">
-          <li className="md:px-4 md:py-2 text-indigo-700  hover:text-indigo-400">
-           Contact
-          </li>
-        </Link>
-          <li className="md:px-4 md:py-2 text-indigo-700 hover:text-indigo-400">
-           Search
-          </li>
-          <li className="md:px-4 md:py-2 text-indigo-700   hover:text-indigo-400">
-           Explore
-          </li>
-        </ul>
-      </div>
-      <div className="order-2 md:order-3">
-        <Link href="/signup">
-        <button className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
-          {/* Heroicons - Login Solid */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <span>Sign up</span>
-        </button>
-        </Link>
-      </div>
-      <div className="order-2 md:order-3">
-        <Link href="/login">
-        <button className="px-4 py-2 bg-indigo-700 hover:bg-indigo-600 text-gray-50 rounded-xl flex items-center gap-2">
-          {/* Heroicons - Login Solid */}
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-5 w-5"
-            viewBox="0 0 20 20"
-            fill="currentColor"
-          >
-            <path
-              fillRule="evenodd"
-              d="M3 3a1 1 0 011 1v12a1 1 0 11-2 0V4a1 1 0 011-1zm7.707 3.293a1 1 0 010 1.414L9.414 9H17a1 1 0 110 2H9.414l1.293 1.293a1 1 0 01-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0z"
-              clipRule="evenodd"
-            />
-          </svg>
-          <span>Login</span>
-        </button>
-        </Link>
-      </div>
-    </div>
-  </nav>
-</>
+        <>
+      <nav className="fixed top-0 w-full bg-white border-gray-200 py-2.5 dark:bg-gray-900">
+        <div className="flex flex-wrap items-center justify-between  px-4 mx-auto">
+          <img
+            src="Design.jpg"
+            className="h-6 mr-3 sm:h-9"
+            alt="Logo"
+          />
+          {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
+                Landwind
+              </span> */}
 
-  {/* ========== END HEADER ========== */}
-</>
-
-    </div>
-  )
-}
+          < div className="flex items-center justify-right lg:order-2 sm:gap-1 md:gap-1 xsm:gap-1">
+            {/* <div className=" mt-2 mr-4 sm:inline-block">
+              <span></span>
+            </div> */}
+            
+              <Link
+                href="/signup"
+                className=" text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+              >
+                Signup
+              </Link>
+              <Link
+                href="/login"
+                className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+              >
+                Login
+              </Link>
+              
+            <button
+              data-collapse-toggle="mobile-menu-2"
+              type="button"
+              className="inline-flex items-center p-2 ml-1 text-sm text-gray-500 rounded-lg lg:hidden  hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
+              aria-controls="mobile-menu-2"
+              aria-expanded="true"
+            >
+              <span className="sr-only">Open main menu</span>
+              {/* for three parallel lines  */}
+              <svg
+                className="w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+                  clipRule="evenodd"
+                />
+              </svg>
+              {/* for container of three parallel lines */}
+              <svg
+                className="hidden w-6 h-6"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  fillRule="evenodd"
+                  d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                  clipRule="evenodd"
+                />
+              </svg>
+            </button>
+          </div>
+          <div
+            className="items-center justify-between w-full lg:flex lg:w-auto lg:order-1"
+            id="mobile-menu-2"
+          >
+            <ul className="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0">
+              <Link href="/">
+                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  Home
+                </li>
+              </Link>
+              <Link href="/about">
+                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  about
+                </li>
+              </Link>
+              <Link href="/contact">
+                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  contact
+                </li>
+              </Link>
+              <Link href="/features">
+                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  Features
+                </li>
+              </Link>
+              <Link href="/team">
+                <li className="block py-2 pl-3 pr-4 text-gray-700 border-b border-gray-100 hover:bg-gray-50 lg:hover:bg-transparent lg:border-0 lg:hover:text-purple-700 lg:p-0 dark:text-gray-400 lg:dark:hover:text-white dark:hover:bg-gray-700 dark:hover:text-white lg:dark:hover:bg-transparent dark:border-gray-700">
+                  Team
+                </li>
+              </Link>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </>
+  );
+};
 
 export default Navbar;

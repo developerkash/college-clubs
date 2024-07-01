@@ -44,16 +44,22 @@ const Signup = () => {
     <>
       {/* source:https://codepen.io/owaiswiz/pen/jOPvEPB */}
       <div
-        className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
-      >
-        <div className="max-w-screen-xl  mb-10 sm:m-10 bg-white shadow sm:rounded-lg flex justify-center flex-1">
-          {/* first division containing form */}
-          <div className=" xl:w-6/12 p-6 sm:p-12">
-            <div>
-              <img src="Design.jpg" className="w-16 mx-auto" />
-            </div>
-
-            <h1 className="mt- text-2xl font-bold text-center">
+      className="
+                    xl:h-screen lg:h-screen md:h-screen sm:h-screen  2xl:h-screen
+                    bg-indigo-50  flex  justify-center"
+    >
+      <div className="max-h-full  md:mt-24 sm:mt-32 lg:m-32  text-black  flex justify-center w-full  ">
+        <div className="w-5/12">
+          <img
+            src="https://i.pinimg.com/564x/10/90/6c/10906cb2e6ada9bdd6c465f5242ad255.jpg"
+            alt=""
+            className="h-full"
+          />
+        </div>
+        <div className="w-7/12 bg-white">
+          <div className="mx-5">
+            
+            <h1 className=" text-2xl font-bold text-center tex">
               Sign in with:
             </h1>
 
@@ -98,7 +104,7 @@ const Signup = () => {
                   >
                     First name
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="text"
                       name="first_name"
@@ -108,11 +114,11 @@ const Signup = () => {
                       autoComplete="given-name"
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
                     />
-                    {adduser.touched.first_name && (
+                     {adduser.touched.first_name && (
                       <small className="text-red-500">
                         {adduser.errors.first_name}
                       </small>
-                    )}
+                    )} 
                   </div>
                 </div>
                 <div>
@@ -122,7 +128,7 @@ const Signup = () => {
                   >
                     Last name
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="text"
                       name="last_name"
@@ -151,7 +157,7 @@ const Signup = () => {
                   >
                     Email
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="email"
                       name="email"
@@ -175,7 +181,7 @@ const Signup = () => {
                   >
                     Contact
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="number"
                       name="contact"
@@ -203,7 +209,7 @@ const Signup = () => {
                   >
                     Password
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="password"
                       name="password"
@@ -213,11 +219,11 @@ const Signup = () => {
                       onChange={adduser.handleChange}
                       value={adduser.values.password}
                     />
-                    {adduser.touched.password && (
+                     {adduser.touched.password && (
                       <small className="text-red-500">
                         {adduser.errors.password}
                       </small>
-                    )}
+                    )} 
                   </div>
                 </div>
                 <div>
@@ -227,7 +233,7 @@ const Signup = () => {
                   >
                     Confirm Password
                   </label>
-                  <div className="mt-2.5">
+                  <div className="">
                     <input
                       type="password"
                       name="confirm_password"
@@ -244,30 +250,32 @@ const Signup = () => {
                     )}
                   </div>
                 </div>
-                <div className=" flex items-center">
-  <div className="flex">
-    <input
-      id="remember-me"
-      name="remember-me"
-      type="checkbox"
-      className="shrink-0 mt-0.5 border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
-    />
-  </div>
-  <div className="ms-3">
-    <label htmlFor="remember-me" className="text-sm dark:text-white">
-      I accept the{" "}
-      <a
-        className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
-        href="#"
-      >
-        Terms and Conditions
-      </a>
-    </label>
-  </div>
-</div>
-
+                <div className=" flex items-center justify-start">
+                  <div className="flex">
+                    <input
+                      id="remember-me"
+                      name="remember-me"
+                      type="checkbox"
+                      className="shrink-0 mt- border-gray-200 rounded text-blue-600 focus:ring-blue-500 dark:bg-neutral-900 dark:border-neutral-700 dark:checked:bg-blue-500 dark:checked:border-blue-500 dark:focus:ring-offset-gray-800"
+                    />
+                  </div>
+                  <div className="ms-3">
+                    <label
+                      htmlFor="remember-me"
+                      className="text-sm dark:text-white"
+                    >
+                      I accept the{" "}
+                      <a
+                        className="text-blue-600 decoration-2 hover:underline font-medium dark:text-blue-500"
+                        href="#"
+                      >
+                        Terms and Conditions
+                      </a>
+                    </label>
+                  </div>
+                </div>
               </div>
-              <div className="mt-5">
+              <div className="">
                 <button
                   type="submit"
                   className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
@@ -283,15 +291,9 @@ const Signup = () => {
               </a>
             </div>
           </div>
-          {/* End of first division */}
-
-          {/* second division containing BackgroundImage */}
-          <div className="flex-1 bg-indigo-100 text-center  lg:flex">
-            <img src="https://i.pinimg.com/originals/34/ad/1c/34ad1c2bbf283d9e8c16cf50484f8db0.jpg" />
-          </div>
-          {/* End of secnd division */}
         </div>
       </div>
+    </div>
     </>
   );
 };
