@@ -4,8 +4,8 @@ import React from 'react'
 const ForgetPassword = () => {
   return (
     <div
-    className="min-h-screen  bg-red-100 text-gray-900 flex justify-center"
-    style={{ backgroundColor: "#9A616D" }}
+    className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
+    
   >
     <main id="content" role="main" className="w-full  max-w-md m-auto p-6">
       <div className="mt-7 bg-white  rounded-xl shadow-lg dark:bg-gray-800 dark:border-gray-700 border-2 border-indigo-300">

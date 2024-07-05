@@ -18,6 +18,7 @@ const Home = () => {
     <>
       <Navbar />
       <Swiper
+      
         spaceBetween={30}
         centeredSlides={true}
         autoplay={{
@@ -29,7 +30,7 @@ const Home = () => {
         }}
         navigation={true}
         modules={[Autoplay, Pagination, Navigation]}
-        className="mySwiper"
+        className="mySwiper mt-12"
         style={{ height: '600px' }}
       >
         <SwiperSlide >

@@ -3,13 +3,14 @@ import React from "react";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast from "react-hot-toast";
 
 const Signup = () => {
   const signupvalidationschema = Yup.object().shape({
     first_name: Yup.string().required("Required"),
     last_name: Yup.string().required("Required"),
     email: Yup.string().email("Invalid email").required("Required"),
-    contact: Yup.number().required("Required").min(10, "Invalid contact"),
+    contact: Yup.number().required("Required"), 
 
     password: Yup.string()
       .required("Required")
@@ -33,9 +34,21 @@ const Signup = () => {
       password: "",
       confirm_password: "",
     },
-    onSubmit: (values, action) => {
-      action.resetForm();
+    onSubmit: async (values, action) => {
       console.log(values);
+      
+      const res = await fetch("http://localhost:5000/user/add", {
+        method: "POST",                               // method is POST to send data to the server 
+        headers: {"Content-Type": "application/json"}, // headers is an object that contains the content type of the data 
+        body: JSON.stringify(values),         // values is an object that contains all the form data 
+      });
+      console.log(res.status);
+      // action.resetForm();
+      if (res.status === 200) {
+        toast.success("User added successfully");
+      } else {
+        toast.error("User not added");
+      }
     },
     validationSchema: signupvalidationschema,
   });
