@@ -1,6 +1,7 @@
 "use client";
 import { useFormik } from "formik";
 import React from "react";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
 
 
@@ -31,6 +32,11 @@ const CreateClub = () => {
         });
       action.resetForm();
       console.log(res.status);
+      if (res.status === 200) {
+        toast.success("Club Created Successfully");
+      } else {
+        toast.error("Failed to create club");
+      }
 
     },
     validationSchema: CreateClubValidation,

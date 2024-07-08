@@ -38,7 +38,7 @@ const Clubs = () => {
                 {club.clubname}
               </span>
               <p className="text-lg font-bold text-black truncate block capitalize">
-                Product Name
+                {club.clubtype}
               </p>
               <div className="flex items-center">
                 <p className="text-lg font-semibold text-black cursor-auto my-3">

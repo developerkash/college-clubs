@@ -1,31 +1,42 @@
 "use client";
 import React from "react";
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+import toast from "react-hot-toast";
 
 const Login = () => {
-  const loginvalidationschema = Yup.object().shape({
-    email: Yup.string().email("Invalid email").required("Required"),
-
-    password: Yup.string()
-      .required("Required"),
-      
-
-    remember: Yup.string().required("Required"),
-  });
-
+  
   const loginuser = useFormik({
     initialValues: {
       email: "",
       password: "",
       remember: "",
     },
-    onSubmit: (values, action) => {
+    onSubmit: async (values, action) => {
       action.resetForm();
       console.log(values);
+
+      const res = await fetch("http://localhost:5000/user/authenticate", {
+        method: "POST",
+        body: JSON.stringify(values),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(res.status);
+
+      if (res.status === 200) {
+        toast.success("Login Successfull");
+        const data = await res.json();
+        console.log(data);
+        sessionStorage.setItem("user", JSON.stringify(data));
+        setLoggedIn(true);
+      } else if (res.status === 401) {
+        toast.error("Invalid Credentials");
+      } else {
+        toast.error("Some error occured");
+      }
     },
-    validationSchema: loginvalidationschema,
   });
 
   return (
@@ -43,12 +54,8 @@ const Login = () => {
           />
         </div>
         <div className="w-7/12 bg-white">
-        <div className="mx-5">
-            
-
-            <h1 className=" text-2xl font-bold text-center">
-              Sign in with:
-            </h1>
+          <div className="mx-5">
+            <h1 className=" text-2xl font-bold text-center">Sign in with:</h1>
 
             {/* Form */}
             <form onSubmit={loginuser.handleSubmit}>
@@ -97,17 +104,13 @@ const Login = () => {
                       id="email"
                       name="email"
                       className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      required=""
+                      required
                       aria-describedby="email-error"
                       onChange={loginuser.handleChange}
                       value={loginuser.values.email}
                     />
                     {/* Error Message */}
-                    {loginuser.touched.email && (
-                      <small className="text-red-500">
-                        {loginuser.errors.email}
-                      </small>
-                    )}
+                   
                   </div>
                 </div>
                 {/* End Form Group */}
@@ -140,11 +143,7 @@ const Login = () => {
                       value={loginuser.values.password}
                     />
                     {/* Error Message */}
-                    {loginuser.touched.password && (
-                      <small className="text-red-500">
-                        {loginuser.errors.password}
-                      </small>
-                    )} 
+
                     <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
                       <svg
                         className="size-5 text-red-500"
