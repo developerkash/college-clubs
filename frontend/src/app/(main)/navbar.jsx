@@ -1,39 +1,60 @@
+"use client";
+import useAppContext from "@/context/AppContext";
 import Link from "next/link";
 import React from "react";
 
-
 const Navbar = () => {
-  return (
+  const { loggedIn, logout } = useAppContext();
+  console.log(loggedIn);
+
+  const Showloggedin = () => {
+    if (loggedIn) {
+      return (
         <>
+          <button
+            onClick={logout}
+            className=" text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+          >
+            logout
+          </button>
+        </>
+      );
+    } else {
+      return (
+        <>
+         
+         <Link
+              href="/signup"
+              className=" text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+            >
+              
+            </Link>
+            <Link
+              href="/login"
+              className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
+            >
+              Login
+            </Link>
+        </>
+      );
+    }
+  };
+
+  return (
+    <>
       <nav className="fixed top-0 w-full bg-white border-gray-200 py-2.5 dark:bg-gray-900">
         <div className="flex flex-wrap items-center justify-between  px-4 mx-auto">
-          <img
-            src="Design.jpg"
-            className="h-6 mr-3 sm:h-9"
-            alt="Logo"
-          />
+          <img src="Design.jpg" className="h-6 mr-3 sm:h-9" alt="Logo" />
           {/* <span className="self-center text-xl font-semibold whitespace-nowrap dark:text-white">
                 Landwind
               </span> */}
 
-          < div className="flex items-center justify-right lg:order-2 sm:gap-1 md:gap-1 xsm:gap-1">
+          <div className="flex items-center justify-right lg:order-2 sm:gap-1 md:gap-1 xsm:gap-1">
             {/* <div className=" mt-2 mr-4 sm:inline-block">
               <span></span>
             </div> */}
-            
-              <Link
-                href="/signup"
-                className=" text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-4 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-              >
-                Signup
-              </Link>
-              <Link
-                href="/login"
-                className="text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-purple-600 dark:hover:bg-purple-700 focus:outline-none dark:focus:ring-purple-800"
-              >
-                Login
-              </Link>
-              
+{Showloggedin()}
+
             <button
               data-collapse-toggle="mobile-menu-2"
               type="button"
