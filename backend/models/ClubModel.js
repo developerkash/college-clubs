@@ -2,17 +2,26 @@
 const { Schema, model } = require('../connection')
 
 const clubSchema = new Schema({
-    clubname:{
+    club_name:{
         type:String,
         required:true
     },
-    clubtype:{
+    club_type:{
+        type:String,
+        required:true
+    },
+    club_cordinator:{
         type:String,
         required:true
     },
     description:{
         type:String,
         required:true
+    },
+    created_on:{
+        type:Date,
+        default:Date.now
+    
     }
 })
 
