@@ -13,7 +13,6 @@ const Login = () => {
       remember: "",
     },
     onSubmit: async (values, action) => {
-      action.resetForm();
       console.log(values);
 
       const res = await fetch("http://localhost:5000/user/authenticate", {
@@ -29,8 +28,10 @@ const Login = () => {
         toast.success("Login Successfull");
         const data = await res.json();
         console.log(data);
-        sessionStorage.setItem("user", JSON.stringify(data));
+        sessionStorage.setItem('user', JSON.stringify(data))
         setLoggedIn(true);
+        action.resetForm();
+        router.push("/");
       } else if (res.status === 401) {
         toast.error("Invalid Credentials");
       } else {

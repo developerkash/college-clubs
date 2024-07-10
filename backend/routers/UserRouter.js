@@ -1,6 +1,6 @@
 const express = require('express'); // Importing express module to create a server instance and handle the requests and responses from the client side.
 const router = express.Router();    // Creating an instance of express router.
-const Model = require('../Models/UserModel'); // Importing the user model.
+const Model = require('../models/UserModel'); // Importing the user model.
 const verifyToken = require('./VerifyToken'); // Importing the verifyToken function from the VerifyToken.js file.
 const jwt = require('jsonwebtoken'); // Importing the jsonwebtoken module to create a token.
 require('dotenv').config(); // Importing the dotenv module to access the environment variables.
@@ -21,8 +21,8 @@ router.post('/authenticate', (req, res) => {
     Model.findOne(req.body)
         .then((result) => {
             if (result) {
-                const { _id,first_name, last_name, email, contact  } = result
-                const payload = { _id, first_name, last_name, email, contact  };
+                const { _id, first_name, last_name, email } = result
+                const payload = { _id, first_name, last_name, email };
 
                 jwt.sign(
                     payload,
@@ -33,7 +33,7 @@ router.post('/authenticate', (req, res) => {
                             console.log(err);
                             res.status(500).json({ message: 'error creating token' })
                         } else {
-                            res.status(200).json({ token, first_name, last_name, email, contact })
+                            res.status(200).json({ token, first_name, last_name, email })
                         }
                     }
                 )

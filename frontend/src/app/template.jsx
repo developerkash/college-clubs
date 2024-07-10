@@ -1,12 +1,13 @@
-'use client';
+"use client";
 import { AppProvider } from "@/context/AppContext";
-import React from 'react'
+import React from "react";
 
-const Template = ({Children}) =>{
-    return(
-        <AppProvider>
-            {Children}
-        </AppProvider>
-    )
-}
-export default Template
+const Template = ({ children }) => {
+  return (
+          <AppProvider>
+            {children}
+          </AppProvider>
+  );
+};
+
+export default Template;

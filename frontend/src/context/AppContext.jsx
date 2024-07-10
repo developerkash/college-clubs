@@ -1,33 +1,39 @@
-const { createContext, useState, useContext, useEffect } = require("react");
- // Assuming you are using Next.js
+const { useRouter } = require("next/navigation");
+const { createContext, useState, useContext } = require("react");
 
 const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
-    const [currentUser, setcurrentUser] = useState(null);
-    const [loggedin, setloggedin] = useState(false);
+  const router = useRouter();
 
-    useEffect(() => {
-        const user = sessionStorage.getItem("user");
-        if (user) {
-            setcurrentUser(JSON.parse(user));
-            setloggedin(true);
-        }
-    }, []);
+  const [currentUser, setCurrentUser] = useState(
+    JSON.parse(sessionStorage.getItem("user"))
+  );
 
-    const logout = () => {
-        setcurrentUser(null);
-        sessionStorage.removeItem("user");
-        setloggedin(false);
-        router.push("/login");
-    }
+  const [loggedIn, setLoggedIn] = useState(currentUser !== null);
 
-    return (
-        <AppContext.Provider value={{ currentUser, setcurrentUser, loggedin, setloggedin, logout }}>
-            {children}
-        </AppContext.Provider>
-    );
+  const logout = () => {
+    setCurrentUser(null);
+    sessionStorage.removeItem("user");
+    setLoggedIn(false);
+    router.push("/login");
+  };
+
+  return (
+    <AppContext.Provider
+      value={{
+        currentUser,
+        setCurrentUser,
+        loggedIn,
+        setLoggedIn,
+        logout,
+      }}
+    >
+      {children}
+    </AppContext.Provider>
+  );
 };
 
-const useAppContext = () => useContext (AppContext)
-export default useAppContext
+
+const useAppContext = () => useContext(AppContext);
+export default useAppContext;
