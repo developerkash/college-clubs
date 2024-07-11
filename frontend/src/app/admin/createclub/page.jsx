@@ -9,6 +9,7 @@ const CreateClub = () => {
     initialValues: {
       club_name: "",
       club_type: "",
+      club_subtype: "",
       club_cordinator: "",
       description: "",
       created_on: "",
@@ -57,6 +58,26 @@ const CreateClub = () => {
                       required
                       onChange={createnewclub.handleChange}
                       value={createnewclub.values.club_type}
+                    />
+                  </div>
+                </div>
+                {/* Club Type */}
+                <div>
+                  <label
+                    htmlFor="club_type"
+                    className="block text-sm font-semibold leading-6 text-gray-900"
+                    >
+                    Club Sub-Type
+                  </label>
+                  <div className="mt-2">
+                    <input
+                      type="text"
+                      id="club_subtype"
+                      name="club_subtype"
+                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+                      required
+                      onChange={createnewclub.handleChange}
+                      value={createnewclub.values.club_subtype}
                     />
                   </div>
                 </div>
@@ -111,7 +132,7 @@ const CreateClub = () => {
                     Description
                   </label>
                   <div className="mt-2">
-                    <input
+                    <textarea
                       type="text"
                       id="description"
                       name="description"

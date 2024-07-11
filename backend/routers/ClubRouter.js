@@ -21,6 +21,17 @@ router.get('/getall' , (req, res)=>{
         console.log(err);
         res.status(500).json.apply(err)
     });
+})
+
+router.get('/getbyid/:id', (req, res)=>{
+    Model.findById(req.params.id)           // params is used to get the parameters from the url.
+    .then((result)=>{
+        res.json(result);
+    })
+    .catch((err)=>{
+        console.log(err);
+        res.status(500).json(err);
+    });
 });
 
 

@@ -10,6 +10,10 @@ const clubSchema = new Schema({
         type:String,
         required:true
     },
+    club_subtype:{
+        type:String,
+        required:true
+    },
     club_cordinator:{
         type:String,
         required:true
