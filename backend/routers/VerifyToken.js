@@ -1,7 +1,7 @@
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-const VerifyToken = (req, res, next) => {
+const verifyToken = (req, res, next) => {
 
     // get the token from the request header
     const token = req.header('x-auth-token');
@@ -9,6 +9,7 @@ const VerifyToken = (req, res, next) => {
     if (!token) {
         return res.status(401).json({ msg: 'No token, authorization denied' });
     }
+
     // verify token
     try {
 
@@ -28,4 +29,4 @@ const VerifyToken = (req, res, next) => {
     }
 
 }
-module.exports = VerifyToken;
+module.exports = verifyToken;

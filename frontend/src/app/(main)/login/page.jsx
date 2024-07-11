@@ -8,37 +8,42 @@ const Login = () => {
   
   const loginuser = useFormik({
     initialValues: {
-      email: "",
-      password: "",
-      remember: "",
+      email: '',
+      password: '',
     },
     onSubmit: async (values, action) => {
+
       console.log(values);
 
-      const res = await fetch("http://localhost:5000/user/authenticate", {
-        method: "POST",
+      const res = await fetch('http://localhost:5000/user/authenticate', {
+        method: 'POST',
         body: JSON.stringify(values),
         headers: {
-          "Content-Type": "application/json",
-        },
+          'Content-Type': 'application/json'
+        }
+
       });
-      console.log(res.status);
+      console.log(res.status)
 
       if (res.status === 200) {
-        toast.success("Login Successfull");
+        toast.success("Login successfull")
+
         const data = await res.json();
         console.log(data);
-        sessionStorage.setItem('user', JSON.stringify(data))
+        sessionStorage.setItem('user', JSON.stringify(data));
         setLoggedIn(true);
+        setCurrentUser(data);
         action.resetForm();
-        router.push("/");
-      } else if (res.status === 401) {
-        toast.error("Invalid Credentials");
-      } else {
-        toast.error("Some error occured");
+        router.push('/');
       }
+      else if (res.status === 401) {
+        toast.error("Invalid Credentials")
+      }
+
     },
-  });
+    // validationSchema: LoginSchema
+
+  })
 
   return (
     <div
