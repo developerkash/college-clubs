@@ -26,7 +26,11 @@ const clubSchema = new Schema({
         type:Date,
         default:Date.now
     
-    }
+    },
+    image:{
+        type:String,
+        required:true
+    },
 })
 
 module.exports = model('club', clubSchema) // Export the model with the schema

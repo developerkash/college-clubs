@@ -49,7 +49,7 @@ const Clubs = () => {
                 </div>
                 <div>
                   <Link
-                    href=""
+                    href={`/ViewClub/${club._id}`}
                     className="text-blue-500 hover:text-blue-700 text-sm font-semibold"
                   >
                     <p className="text-right">View more</p>

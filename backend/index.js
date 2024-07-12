@@ -4,6 +4,8 @@ const port = 5000;                  // Port number where the server will run.
 const cors = require('cors');       // Importing cors module to allow cross-origin requests.
 const ClubRouter = require('./routers/ClubRouter'); // Importing the UserRouter from the routers folder.
 const UserRouter = require('./routers/UserRouter'); // Importing the UserRouter from the routers folder.
+const utilRouter = require('./routers/utils'); // Importing the UserRouter from the routers folder.
+
 
 app.use(express.json());            // Using the express.json() middleware to parse the incoming requests with JSON payloads.
 
@@ -17,6 +19,9 @@ app.use(cors(
 
 app.use('/user', UserRouter);  // Using the UserRouter for handling the requests to the '/user' endpoint.
 app.use('/club',ClubRouter);  // Using the ClubRouter for handling the requests to the '/club' endpoint.
+app.use('/util',utilRouter);  // Using the ClubRouter for handling the requests to the '/club' endpoint.
+
+app.use(express.static('./uploads')); // Serving the static files from the 'uploads' folder.
 
 // Starting the server on the specified port.
 app.listen(port, () => {

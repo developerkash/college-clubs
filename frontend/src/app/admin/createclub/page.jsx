@@ -13,6 +13,7 @@ const CreateClub = () => {
       club_cordinator: "",
       description: "",
       created_on: "",
+      image: "",
         },
     onSubmit: async (values, action) => {
       console.log(values);
@@ -31,6 +32,24 @@ const CreateClub = () => {
         toast.error("Failed to create club");
       }
     },
+
+    const uploadFile = (e) => {
+      const file = e.target.files[0];
+      const fd = new FormData();
+      fd.append("myfile", file);
+      fetch("http://localhost:5000/utils/uploadfile", {
+        method: "POST",
+        body: fd,
+      }).then((res) => {
+        if (res.status == 200) {
+          console.log("File Uploaded Successfully");
+          createnewclub.values.image = file.name;
+        } 
+      });
+    }
+        
+      
+
   });
 
   return (
@@ -161,6 +180,23 @@ const CreateClub = () => {
                     value={createnewclub.values.created_on}
                  />
                 </div>
+                <div className="mt-2">
+                  <label
+                    htmlFor="file-upload"
+                    className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
+                  >
+                    Upload file
+                  </label>
+                  <input 
+                    type="file"
+                    name="file-upload"
+                    id="file-upload"
+                    required
+                    aria-describedby="club-creation-date"
+                    onChange={uploadFile}
+                 />
+                </div>
+                
                 <button
                     type="submit"
                     className="block w-full mt-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
