@@ -132,7 +132,7 @@ const AdminNavbar = () => {
             {/* DashBoard */}
             <li>
               <a
-                href="../admin/dashboard"
+                href="dashboard"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -150,8 +150,8 @@ const AdminNavbar = () => {
             </li>
             {/* Create Club */}
             <li>
-              <a
-                href="../admin/createclub"
+              <Link
+                href="createclub"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -166,12 +166,12 @@ const AdminNavbar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Create Club
                 </span>
-              </a>
+              </Link>
             </li>
             {/* Manage Club */}
             <li>
-              <a
-                href="#"
+              <Link
+                href="manageclub"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -186,12 +186,12 @@ const AdminNavbar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Manage Clubs
                 </span>
-              </a>
+              </Link>
             </li>
             {/* Manage User */}
             <li>
               <Link
-                href="../manageuser"
+                href="manageuser"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg

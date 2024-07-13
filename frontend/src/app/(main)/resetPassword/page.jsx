@@ -1,158 +1,226 @@
 "use client";
-import React from "react";
-import * as Yup from "yup";
 import { useFormik } from "formik";
+import { useRouter } from "next/navigation";
+import React, { useRef, useState } from "react";
+import { useNavigate } from "next/navigation";
+import toast from "react-hot-toast";
 
-// yup for form validation
-const ResetFormvalidationSchema = Yup.object({
-  password: Yup.string()
-    .required("Required")
-    .min(8, "Password is too short - should be 8 chars minimum.")
-    .matches(/[a-z]/, "password must contain 1 lowercase letter")
-    .matches(/[A-Z]/, "password must contain 1 uppercase letter")
-    .matches(/[0-9]/, "password must contain 1 number")
-    .matches(/[\w]/, "password must contain 1 special case letter"),
+const ResetPassword = () => {
+  const emailRef = useRef(null);
+  const otpRef = useRef(null);
 
-  confirmPassword: Yup.string()
-    .required("Required")
-    .oneOf([Yup.ref("password"), null], "Passwords must match"),
-});
-const ResetForm = () => {
-  // formik form
-  const resetPassword = useFormik({
+  const [verifiedUser, setVerifiedUser] = useState(null);
+
+  const [showForm, setShowForm] = useState(false);
+
+  const router = useRouter();
+
+  const checkMailExists = async () => {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/user/getbyemail/${emailRef.current.value}`
+    );
+    console.log(res.status);
+    const data = await res.json();
+    // console.log(data);
+    setVerifiedUser(data);
+    return res.status === 200;
+  };
+
+  const sendOTP = async () => {
+    if (!(await checkMailExists())) {
+      toast.error("Email not registered", { variant: "error" });
+      return;
+    }
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}`/util/sendotp, {
+      method: "POST",
+      body: JSON.stringify({ email: emailRef.current.value }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    console.log(res.status);
+    if (res.status === 201) {
+      toast.success("OTP sent");
+    } else {
+      toast.error("OTP not sent");
+    }
+  };
+
+  const verifyOTP = async () => {
+    const res = await fetch(
+     `${process.env.NEXT_PUBLIC_API_URL}/util/verifyotp/${emailRef.current.value}/${otpRef.current.value}`
+    );
+    // console.log(res.status);
+    if (res.status === 200) {
+      setShowForm(true);
+    } else {
+      toast.error("OTP not verified");
+    }
+  };
+
+  const resetForm = useFormik({
     initialValues: {
+      email: "",
       password: "",
-      confirmPassword: "",
+      cpassword: "",
     },
-    onsubmit: (values, action) => {
-      action.ResetForm();
+    onSubmit: (values) => {
       console.log(values);
+      fetch(
+       ` ${process.env.NEXT_PUBLIC_API_URL}/user/update/${verifiedUser._id}`,
+        {
+          method: "PUT",
+          body: JSON.stringify({
+            password: values.password,
+          }),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+        .then((res) => {
+          console.log(res.status);
+          if (res.status === 200) {
+            toast.success("Password reset successful");
+            router.push("/login");
+          } else {
+            toast.error("Password reset failed");
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     },
-    validationSchema: ResetFormvalidationSchema,
   });
   return (
-    <div
-      
-      className="min-h-screen  bg-indigo-50 text-gray-900 flex justify-center"
-    >
-      <div className="w-96 mt-15 bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-neutral-900 dark:border-neutral-700 m-auto">
-        <div className="p-4 sm:p-7">
-          <div className="text-center">
-            <h1 className="block text-2xl font-bold text-gray-800 dark:text-white">
-              Create New Password
-            </h1>
-          </div>
-          <div className="mt-5">
-            {/* Form */}
-            <form onSubmit={resetPassword.handleSubmit}>
-              <div className="grid gap-y-4">
-                {/* Form Group */}
+    <>
+      <section className="bg-[#F5F5F5] dark:bg-gray-900">
+        <div className="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
+          <a
+            href="#"
+            className="flex items-center mb-6 text-2xl font-semibold text-black dark:text-white"
+          >
+            <img className="w-12 h-12 mr-2" src="logo.png" alt="logo" />
+            VOX-MARKET
+          </a>
+          <div className="w-full p-6 bg-purple-50 rounded-lg shadow dark:border md:mt-0 sm:max-w-md dark:bg-gray-800 dark:border-gray-700 sm:p-8">
+            <h2 className="mb-1 text-xl justify-center text-center font-bold leading-tight tracking-tight text-black md:text-2xl dark:text-white">
+              Change Password
+            </h2>
+            {/* <form className="mt-4 space-y-4 lg:mt-5 md:space-y-5"> */}
+            <div>
+              <label
+                htmlFor="email"
+                className="block mb-2 text-sm font-medium text-black dark:text-white"
+              >
+                Your email
+              </label>
+              <input
+                type="email"
+                ref={emailRef}
+                className="bg-gray-50 border border-[#000] text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@company.com"
+                required=""
+              />
+            </div>
+            <div>
+              <button
+                type="Submit"
+                onClick={sendOTP}
+                className="mt-2 radius-xl bg-[#FC9B3C] border border-[#FC9B3C] w-1/2 rounded-lg"
+              >
+                Send OTP
+              </button>
+            </div>
+            <div>
+              <input
+                type="text"
+                label="Enter OTP"
+                ref={otpRef}
+                placeholder="Enter OTP"
+                className="mt-5 radius-xl"
+              />
+            </div>
+            <div>
+              <button
+                onClick={verifyOTP}
+                className="mt-2 radius-xl bg-[#FC9B3C] border border-[#FC9B3C] w-1/2 rounded-lg"
+              >
+                Verify OTP
+              </button>
+            </div>
+            {showForm && (
+              <form onSubmit={resetForm.handleSubmit}>
                 <div>
                   <label
                     htmlFor="password"
-                    className="block text-sm mb-2 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-black dark:text-white"
                   >
                     New Password
                   </label>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      id="password"
-                      name="password"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      required=""
-                      aria-describedby="password-error"
-                      onChange={resetPassword.handleChange}
-                      value={resetPassword.values.password}
-                    />
-                    {/* password error */}
-                    {resetPassword.touched.password && (
-                      <small className="text-red-500">
-                        {resetPassword.errors.password}
-                      </small>
-                    )}
-                    <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                      <svg
-                        className="size-5 text-red-500"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                      >
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <p
-                    className="hidden text-xs text-red-600 mt-2"
-                    id="password-error"
-                  >
-                    8+ characters required
-                  </p>
+                  <input
+                    type="password"
+                    name="password"
+                    onChange={resetForm.handleChange}
+                    value={resetForm.values.password}
+                    className="bg-gray-50 border border-gray-300 text-[#000] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                  />
                 </div>
-                {/* End Form Group */}
-                {/* Form Group */}
                 <div>
                   <label
                     htmlFor="confirm-password"
-                    className="block text-sm mb-2 dark:text-white"
+                    className="block mb-2 text-sm font-medium text-black dark:text-white"
                   >
-                    Confirm Password
+                    Confirm password
                   </label>
-                  <div className="relative">
-                    <input
-                      type="password"
-                      id="confirmPassword"
-                      name="confirmpassword"
-                      className="block w-full rounded-md border-0 px-3.5 py-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-                      required=""
-                      aria-describedby="confirm-password-error"
-                      onChange={resetPassword.handleChange}
-                      value={resetPassword.values.confirmPassword}
-                    />
-                    {/* confirm password error */}
-                    {resetPassword.touched.confirmPassword && (
-                      <small className="text-red-500">
-                        {resetPassword.errors.confirmPassword}
-                      </small>
-                    )}
-                    <div className="hidden absolute inset-y-0 end-0 pointer-events-none pe-3">
-                      <svg
-                        className="size-5 text-red-500"
-                        width={16}
-                        height={16}
-                        fill="currentColor"
-                        viewBox="0 0 16 16"
-                        aria-hidden="true"
-                      >
-                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8 4a.905.905 0 0 0-.9.995l.35 3.507a.552.552 0 0 0 1.1 0l.35-3.507A.905.905 0 0 0 8 4zm.002 6a1 1 0 1 0 0 2 1 1 0 0 0 0-2z" />
-                      </svg>
-                    </div>
-                  </div>
-                  <p
-                    className="hidden text-xs text-red-600 mt-2"
-                    id="confirm-password-error"
-                  >
-                    Password does not match the password
-                  </p>
+                  <input
+                    type="password"
+                    name="cpassword"
+                    onChange={resetForm.handleChange}
+                    value={resetForm.values.cpassword}
+                    className="bg-gray-50 border border-gray-300 text-[#000] sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                    required=""
+                  />
                 </div>
-                {/* End Form Group */}
-
+                <div className="flex items-start">
+                  <div className="flex items-center h-5">
+                    <input
+                      id="newsletter"
+                      aria-describedby="newsletter"
+                      type="checkbox"
+                      className="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-primary-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-primary-600 dark:ring-offset-gray-800"
+                      required=""
+                    />
+                  </div>
+                  <div className="ml-3 text-sm">
+                    <label
+                      htmlFor="newsletter"
+                      className="font-light text-black dark:text-gray-300"
+                    >
+                      I accept the{" "}
+                      <a
+                        className="font-medium text-black hover:underline dark:text-primary-500"
+                        href="#"
+                      >
+                        Terms and Conditions
+                      </a>
+                    </label>
+                  </div>
+                </div>
                 <button
                   type="submit"
-                  className="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
+                  className="w-full text-white bg-[#FC9B3C]  border border-[#FC9B3C] hover:text-white focus:ring-4 focus:outline-none focus:ring-[#FC9B3C] font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
                 >
-                  Change Password
+                  Reset passwod
                 </button>
-              </div>
-            </form>
-            {/* End Form */}
+              </form>
+            )}
           </div>
         </div>
-      </div>
-    </div>
+      </section>
+    </>
   );
 };
 
-export default ResetForm;
+export default ResetPassword;

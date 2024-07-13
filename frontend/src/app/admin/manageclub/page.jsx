@@ -28,6 +28,7 @@ const ManageClub = () => {
   }
 
   // update club (assuming updateclub function is defined somewhere)
+  
 
   const displayclubData = () => {
     return clubData.map((club) => (
@@ -47,7 +48,7 @@ const ManageClub = () => {
         <td className="px-6 py-4 text-right">
           <button
             onClick={() => updateclub(club._id)}
-            className="font-medium text-white px-4 py-1 rounded bg-bue-500 hover:underline"
+            className="font-medium text-white px-4 py-1 rounded bg-blue-700 hover:underline"
           >
             Edit
           </button>
