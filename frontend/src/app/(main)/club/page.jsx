@@ -66,9 +66,14 @@ const Clubs = () => {
   return (
     <>
       <section className="bg-amber-100 mt-12 min-h-screen">
+        {/* Div for Academic and Professional Clubs */}
         <div className="w-fit   mx-auto   grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
           {clubList()}
         </div>
+
+        {/* Div for Sports and Recreation Clubs */}
+        
+
       </section>
     </>
   );

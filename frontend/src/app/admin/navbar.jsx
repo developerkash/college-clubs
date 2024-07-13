@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import React from "react";
 
 const AdminNavbar = () => {
@@ -189,8 +190,8 @@ const AdminNavbar = () => {
             </li>
             {/* Manage User */}
             <li>
-              <a
-                href="#"
+              <Link
+                href="../manageuser"
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
               >
                 <svg
@@ -205,7 +206,7 @@ const AdminNavbar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Manage Users
                 </span>
-              </a>
+              </Link>
             </li>
             {/* Events */}
             <li>
