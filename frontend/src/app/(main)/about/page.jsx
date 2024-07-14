@@ -49,5 +49,3 @@ const About = () => {
 export default About;
 
 
-      // xl:h-screen lg:h-screen md:h-screen sm:h-screen  2xl:h-screen
-      // bg-indigo-50  flex  justify-center"

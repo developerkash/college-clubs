@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import React, { use, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Clubs = () => {
   const [clubs, setClubs] = useState([]);
@@ -16,7 +16,7 @@ const Clubs = () => {
         setClubs(data);
       })
       .catch((err) => {
-        console.log(err);
+        console.error('Error:', err);
       });
   };
 

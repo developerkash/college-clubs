@@ -3,7 +3,6 @@ import { useFormik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
 
-
 const CreateClub = () => {
   const createnewclub = useFormik({
     initialValues: {
@@ -180,7 +179,7 @@ const CreateClub = () => {
                 </div>
                 <div className="mt-2">
                   <label
-                    htmlFor="file-upload"
+                    htmlFor="file_upload"
                     className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
                   >
                     Upload File
@@ -188,9 +187,9 @@ const CreateClub = () => {
                   <input
                     type="file"
                     name="file_upload"
-                    id="file-upload"
+                    id="file_upload"
                     required
-                    aria-describedby="club-creation-date"
+                    aria-describedby="file_upload_details"
                     onChange={uploadFile}
                   />
                 </div>
