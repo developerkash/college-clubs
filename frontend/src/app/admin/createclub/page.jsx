@@ -2,7 +2,6 @@
 import { useFormik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
-import * as Yup from "yup";
 
 const CreateClub = () => {
   const createnewclub = useFormik({
@@ -14,7 +13,7 @@ const CreateClub = () => {
       description: "",
       created_on: "",
       image: "",
-        },
+    },
     onSubmit: async (values, action) => {
       console.log(values);
       const res = await fetch("http://localhost:5000/club/add", {
@@ -32,40 +31,37 @@ const CreateClub = () => {
         toast.error("Failed to create club");
       }
     },
-
-    // const uploadFile = (e) => {
-    //   const file = e.target.files[0];
-    //   const fd = new FormData();
-    //   fd.append("myfile", file);
-    //   fetch("http://localhost:5000/utils/uploadfile", {
-    //     method: "POST",
-    //     body: fd,
-    //   }).then((res) => {
-    //     if (res.status == 200) {
-    //       console.log("File Uploaded Successfully");
-    //       createnewclub.values.image = file.name;
-    //     } 
-    //   });
-    // }
-        
-      
-
   });
+  
+  const uploadFile = (e) => {
+    const file = e.target.files[0];
+    const fd = new FormData();
+    fd.append("myfile", file);
+    fetch("http://localhost:5000/utils/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      if (res.status == 200) {
+        console.log("File Uploaded Successfully");
+        createnewclub.values.image = file.name;
+      }
+    });
+  };
 
   return (
     <>
       <div className="min-h-screen flex items-center justify-center bg-gray-100">
         <div className=" items-center bg-white border border-gray-200 rounded-lg shadow md:flex-row lg:w-96 md:max-w-xl  dark:border-gray-700 dark:bg-gray-800 dark:hover:bg-gray-700">
-          <div >
+          <div>
             <p className="text-center">Create a New Club</p>
-          <form onSubmit={createnewclub.handleSubmit}>
+            <form onSubmit={createnewclub.handleSubmit}>
               <div className="  justify-between p-4 leading-normal">
                 {/* Club Type */}
                 <div>
                   <label
                     htmlFor="club_type"
                     className="block text-sm font-semibold leading-6 text-gray-900"
-                    >
+                  >
                     Club Type
                   </label>
                   <div className="mt-2">
@@ -85,7 +81,7 @@ const CreateClub = () => {
                   <label
                     htmlFor="club_type"
                     className="block text-sm font-semibold leading-6 text-gray-900"
-                    >
+                  >
                     Club Sub-Type
                   </label>
                   <div className="mt-2">
@@ -171,14 +167,14 @@ const CreateClub = () => {
                   >
                     Created On :
                   </label>
-                  <input 
+                  <input
                     type="date"
                     name="created_on"
                     required
                     aria-describedby="club-creation-date"
                     onChange={createnewclub.handleChange}
                     value={createnewclub.values.created_on}
-                 />
+                  />
                 </div>
                 <div className="mt-2">
                   <label
@@ -187,22 +183,22 @@ const CreateClub = () => {
                   >
                     Upload file
                   </label>
-                  <input 
+                  <input
                     type="file"
                     name="file-upload"
                     id="file-upload"
                     required
                     aria-describedby="club-creation-date"
                     onChange={uploadFile}
-                 />
+                  />
                 </div>
-                
+
                 <button
-                    type="submit"
-                    className="block w-full mt-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                  >
-                    Create
-                  </button>
+                  type="submit"
+                  className="block w-full mt-5 rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Create
+                </button>
               </div>
             </form>
           </div>

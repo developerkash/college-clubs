@@ -1,8 +1,8 @@
 const multer = require("multer");
-const express = require('express');
 const router = require("express").Router();
 const nodemailer = require('nodemailer');
 require('dotenv').config();
+
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -13,7 +13,13 @@ const storage = multer.diskStorage({
   },
 });
 
+
 const myStorage = multer({ storage: storage });
+
+
+router.post("/uploadfile", myStorage.single("myfile"), (req, res) => {
+  res.status(200).json({ status: "success" });
+});
 
 const mailConfig = {
   service :'gmail',
@@ -31,9 +37,6 @@ const generateOTP = () => {
   return otp;
 }
 
-router.post("/uploadfile", myStorage.single("myfile"), (req, res) => {
-  res.status(200).json({ status: "success" });
-});
 
 router.post('/sendotp', (req, res) => {
   const otp = generateOTP();
@@ -43,7 +46,7 @@ router.post('/sendotp', (req, res) => {
       from : process.env.EMAIL_ID,
       to : req.body.email,
       subject : 'OTP for Password Reset',
-      // html: <p> OTP for password reset is <b>${otp}</b> </p>
+      html: `<p> OTP for password reset is <b>${otp}</b> </p>`
   })
   .then((info) => {
       return res.status(201).json(
