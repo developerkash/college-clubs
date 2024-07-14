@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import React from "react";
 import toast from "react-hot-toast";
 
+
 const CreateClub = () => {
   const createnewclub = useFormik({
     initialValues: {
@@ -32,7 +33,7 @@ const CreateClub = () => {
       }
     },
   });
-  
+
   const uploadFile = (e) => {
     const file = e.target.files[0];
     const fd = new FormData();
@@ -76,10 +77,10 @@ const CreateClub = () => {
                     />
                   </div>
                 </div>
-                {/* Club Type */}
+                {/* Club subType */}
                 <div>
                   <label
-                    htmlFor="club_type"
+                    htmlFor="club_subtype"
                     className="block text-sm font-semibold leading-6 text-gray-900"
                   >
                     Club Sub-Type
@@ -141,7 +142,7 @@ const CreateClub = () => {
                 {/* Club Description */}
                 <div>
                   <label
-                    htmlFor="name"
+                    htmlFor="description"
                     className="block text-sm font-semibold leading-6 text-gray-900"
                   >
                     Description
@@ -162,7 +163,7 @@ const CreateClub = () => {
                 {/* Club creation date */}
                 <div className="mt-2">
                   <label
-                    htmlFor="name"
+                    htmlFor="created_on"
                     className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
                   >
                     Created On :
@@ -170,6 +171,7 @@ const CreateClub = () => {
                   <input
                     type="date"
                     name="created_on"
+                    id="created_on"
                     required
                     aria-describedby="club-creation-date"
                     onChange={createnewclub.handleChange}
@@ -181,11 +183,11 @@ const CreateClub = () => {
                     htmlFor="file-upload"
                     className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
                   >
-                    Upload file
+                    Upload File
                   </label>
                   <input
                     type="file"
-                    name="file-upload"
+                    name="file_upload"
                     id="file-upload"
                     required
                     aria-describedby="club-creation-date"
