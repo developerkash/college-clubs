@@ -37,7 +37,7 @@ const CreateClub = () => {
     const file = e.target.files[0];
     const fd = new FormData();
     fd.append("myfile", file);
-    fetch("http://localhost:5000/utils/uploadfile", {
+    fetch("http://localhost:5000/util/uploadfile", {
       method: "POST",
       body: fd,
     }).then((res) => {
@@ -179,15 +179,15 @@ const CreateClub = () => {
                 </div>
                 <div className="mt-2">
                   <label
-                    htmlFor="file_upload"
+                    htmlFor="image"
                     className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
                   >
                     Upload File
                   </label>
                   <input
                     type="file"
-                    name="file_upload"
-                    id="file_upload"
+                    name="image"
+                    id="image"
                     required
                     aria-describedby="file_upload_details"
                     onChange={uploadFile}

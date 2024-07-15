@@ -1,5 +1,5 @@
-'use client';
-import React, { useEffect, useState } from 'react'
+"use client";
+import React, { useEffect, useState } from "react";
 
 const ManageClub = () => {
   const [clubData, setclubData] = useState([]);
@@ -12,7 +12,7 @@ const ManageClub = () => {
       console.log(data);
       setclubData(data);
     }
-  }
+  };
 
   useEffect(() => {
     fetchclubData();
@@ -21,18 +21,32 @@ const ManageClub = () => {
   const deleteclub = async (id) => {
     console.log(id);
 
-    const res = await fetch('http://localhost:5000/club/delete/' + id, { method: 'DELETE' });
+    const res = await fetch("http://localhost:5000/club/delete/" + id, {
+      method: "DELETE",
+    });
     if (res.status === 200) {
       fetchclubData();
     }
-  }
+  };
 
   // update club (assuming updateclub function is defined somewhere)
-  
+  const updateclub = async (id) => {
+    console.log(id);
+
+    const res = await fetch("http://localhost:5000/club/update/" + id, {
+      method: "PUT",
+    });
+    if (res.status === 200) {
+      fetchclubData();
+    }
+  };
 
   const displayclubData = () => {
     return clubData.map((club) => (
-      <tr key={club._id} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+      <tr
+        key={club._id}
+        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600"
+      >
         {/* <th
           scope="row"
           className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
@@ -62,8 +76,8 @@ const ManageClub = () => {
           </button>
         </td>
       </tr>
-    ))
-  }
+    ));
+  };
 
   return (
     <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-24">
@@ -93,11 +107,9 @@ const ManageClub = () => {
             </th>
           </tr>
         </thead>
-        <tbody>
-          {displayclubData()}
-        </tbody>
+        <tbody>{displayclubData()}</tbody>
       </table>
     </div>
-  )
-}
+  );
+};
 export default ManageClub;

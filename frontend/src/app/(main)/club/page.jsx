@@ -29,11 +29,12 @@ const Clubs = () => {
       return (
         <div className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl">
           <a href="#">
+            {/* Image */}
             <img
-              src="https://media.istockphoto.com/id/1339094198/photo/rear-view-of-a-gaming-setup-with-desktop-pc-and-a-big-monitor.jpg?s=2048x2048&w=is&k=20&c=p5m2SAVrev7kz0UiSBaho9JddZelm8hRq9Mrgvimkmw="
-              alt="Product"
-              className="h-80 w-72 object-cover rounded-t-xl"
-            />
+              src={`http://localhost:5000/${club.image}`}
+              alt="club"
+              className="w-72 h-44 object-cover rounded-t-xl"/>
+              
             <div className="px-4 py-3 w-72">
               <span className="text-lg font-bold text-black  block uppercase ">
                 {club.club_subtype}
