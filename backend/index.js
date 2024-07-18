@@ -5,6 +5,7 @@ const cors = require('cors');
 const ClubRouter = require('./routers/ClubRouter'); 
 const UserRouter = require('./routers/UserRouter'); 
 const utilRouter = require('./routers/utils'); 
+const ContactRouter = require('./routers/ContactRouter');
 
 
 app.use(express.json());            
@@ -19,9 +20,10 @@ app.use(cors(
 
 app.use('/user', UserRouter);  
 app.use('/club',ClubRouter);  
-app.use('/util',utilRouter);  
-
+app.use('/util',utilRouter); 
+app.use('/contact',ContactRouter); //
 app.use(express.static('./uploads')); 
+
 
 // Starting the server on the specified port.
 app.listen(port, () => {
