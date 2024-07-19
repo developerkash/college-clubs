@@ -1,89 +1,117 @@
-'use client';
-import React, { useState } from "react";
+"use client";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
 
-const Toggle = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const toggleModal = () => {
-    setIsModalOpen(!isModalOpen);
+const Clubs = () => {
+  const [clubs, setClubs] = useState([]);
+  const [visibleClubs, setVisibleClubs] = useState({
+    "Academic and Professional Clubs": 3,
+    "Arts and Culture Clubs": 3,
+    "Political and Advocacy Clubs": 3,
+    "Social and Community Service Clubs": 3,
+    "Sports and Recreation Clubs": 3,
+    "Technology and Innovation Clubs": 3,
+  });
+
+
+  const fetchClubs = () => {
+    fetch("http://localhost:5000/club/getall")
+      .then((response) => response.json())
+      .then((data) => setClubs(data))
+      .catch((err) => console.error("Error:", err));
   };
 
-  return (
-    <div className="mt-24">
-      <button
-        className="block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-        type="button"
-        onClick={toggleModal}
-      >
-        Toggle modal
-      </button>
-      
-      <div
-        className={`${
-          isModalOpen ? 'flex' : 'hidden'
-        } fixed top-0 left-0 right-0 bottom-0 z-50 justify-center items-center w-full h-full bg-black bg-opacity-50`}
-      >
-        <div className="relative p-4 w-full max-w-md bg-white rounded-lg shadow dark:bg-gray-700">
-          <button
-            type="button"
-            className="absolute top-3 right-2.5 text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white"
-            onClick={toggleModal}
-          >
-            <svg
-              className="w-3 h-3"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 14 14"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"
-              />
-            </svg>
-            <span className="sr-only">Close modal</span>
-          </button>
-          <div className="p-4 md:p-5 text-center">
-            <svg
-              className="mx-auto mb-4 text-gray-400 w-12 h-12 dark:text-gray-200"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 20 20"
-            >
-              <path
-                stroke="currentColor"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M10 11V6m0 8h.01M19 10a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"
-              />
-            </svg>
-            <h3 className="mb-5 text-lg font-normal text-gray-500 dark:text-gray-400">
-              Are you sure you want to delete this product?
-            </h3>
-            <button
-              type="button"
-              className="text-white bg-red-600 hover:bg-red-800 focus:ring-4 focus:outline-none focus:ring-red-300 dark:focus:ring-red-800 font-medium rounded-lg text-sm inline-flex items-center px-5 py-2.5 text-center"
-              onClick={toggleModal}
-            >
-              Yes, I'm sure
-            </button>
-            <button
-              type="button"
-              className="py-2.5 px-5 ms-3 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-lg border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-100 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
-              onClick={toggleModal}
-            >
-              No, cancel
-            </button>
-          </div>
+
+  useEffect(() => {
+    fetchClubs();
+  }, []);
+
+
+  const renderClubsByType = (type) => {
+    const visibleCount = visibleClubs[type];
+    return clubs
+      .filter((club) => club.club_type === type)
+      .slice(0, visibleCount)
+      .map((club) => (
+        <div
+          key={club._id}
+          className="w-72 bg-white shadow-md rounded-xl duration-500 hover:scale-105 hover:shadow-xl"
+        >
+          <a href="#">
+            <img
+              src={`http://localhost:5000/${club.image}`}
+              alt="club"
+              className="w-72 h-44 object-cover rounded-t-xl"
+            />
+            <div className="px-4 py-3 w-72">
+              <span className="text-lg font-bold text-black block uppercase ">
+                {club.club_subtype}
+              </span>
+              <span className="text-md font-semibold text-black block capitalized italic underline">
+                {club.club_name}
+              </span>
+              <div className="mt-2">
+                <div>
+                  <p className="text-gray-400 uppercase text-xs font-semibold text-black cursor-auto">
+                    Coordinated by: {club.club_cordinator}
+                  </p>
+                </div>
+                <div>
+                  <Link
+                    href={`/ClubDetail/${club._id}`}
+                    className="text-blue-500 hover:text-blue-700 text-sm font-semibold"
+                  >
+                    <p className="text-right">View more</p>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </a>
         </div>
-      </div>
-    </div>
+      ));
+  };
+
+
+  const toggleViewMore = (type) => {
+    setVisibleClubs((prev) => ({
+      ...prev,
+      [type]: prev[type] === 3 ? clubs.filter((club) => club.club_type === type).length : 3,
+    }));
+  };
+
+
+  const clubSections = [
+    "Academic and Professional Clubs",
+    "Arts and Culture Clubs",
+    "Political and Advocacy Clubs",
+    "Social and Community Service Clubs",
+    "Sports and Recreation Clubs",
+    "Technology and Innovation Clubs",
+  ];
+
+
+  return (
+    <section className="bg-amber-100 mt-15 pt-8 min-h-screen">
+      {clubSections.map((section) => (
+        <div key={section} className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
+          <div>
+            <h2 className="text-2xl block font-bold">{section}</h2>
+          </div>
+          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
+            {renderClubsByType(section)}
+          </div>
+          <button
+            onClick={() => toggleViewMore(section)}
+            className="text-white hover:text-blue-700 text-sm font-semibold mt-4 justify-end"
+          >
+            {visibleClubs[section] === 3 ? "View More" : "View Less"}
+          </button>
+        </div>
+      ))}
+    </section>
   );
 };
 
-export default Toggle;
+
+export default Clubs;
