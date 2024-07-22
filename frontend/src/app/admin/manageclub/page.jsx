@@ -46,7 +46,7 @@ const ManageClub = () => {
         <td className="pe-1 py-4">{club.club_subtype}</td>
         <td className="pe-1 py-4">{club.club_name}</td>
         <td className="pe-1 py-4">{club.club_cordinator}</td>
-        <td className="pe-1 py-4">{club.created_on}</td>
+        <td className="pe-1 py-4">{ new Date (club.created_on).toLocaleDateString()}</td>
         <td className="pe-1 py-4">{club.image}</td>
         <td className="px-1 py-4 text-right">
           <button
