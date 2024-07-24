@@ -1,45 +1,84 @@
-import React from 'react';
+import React from "react";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 mt-8">
-      <div className="bg-white shadow-lg rounded-lg p-8 max-w-4xl my-8">
-        <h1 className="text-4xl font-bold mb-6 text-center text-gray-800 ">About Our Club</h1>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          Welcome to the [Club Name] at [College/University Name]! We are a vibrant and dynamic community of students who share a passion for [Club Focus/Interest, e.g., technology, arts, community service]. Our club provides a platform for students to explore their interests, develop their skills, and make meaningful connections.
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 mt-12">
+      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
+        About Our Club
+      </h1>
+
+      <div className="bg-white mt-2 p-5">
+        <p className="text-xl mb-5">
+          Welcome to the [College Name] Clubs Project, a vibrant and dynamic
+          platform designed to enhance your college experience through a diverse
+          range of student-led clubs and organizations. Our project aims to
+          foster a strong sense of community, encourage personal and
+          professional growth, and provide opportunities for students to explore
+          their interests and passions outside the classroom.{" "}
         </p>
-        <h2 className="text-2xl font-semibold mt-6 mb-4 text-gray-800">Our Mission</h2>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          Our mission is to foster a supportive environment where students can engage in [Club Activities, e.g., innovative projects, creative endeavors, community outreach] and grow both personally and professionally. We aim to provide resources, opportunities, and mentorship to help our members succeed.
+
+        <p className="text-xl">
+          {" "}
+          Whether you’re looking to join a club in sports, technology, social
+          causes, or any other special interest, our extensive selection of
+          clubs ensures that there’s something for everyone. Through active
+          participation, you’ll have the chance to develop new skills, make
+          lasting friendships, and contribute to the college community.{" "}
         </p>
-        <h2 className="text-2xl font-semibold mt-6 mb-4 text-gray-800">Our Activities</h2>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          Throughout the academic year, we organize a variety of activities and events, including:
+
+        <p className="text-xl">
+          {" "}
+          Join us in creating an engaging and inclusive environment where every
+          student can thrive and make the most of their college journey.
+          Discover your passion, build your network, and make a difference with
+          the [College Name] Clubs Project.
         </p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
-          <li>Workshops and seminars led by industry professionals</li>
-          <li>Collaborative projects and hackathons</li>
-          <li>Networking events and guest speaker sessions</li>
-          <li>Social gatherings and team-building activities</li>
-          <li>Community service and outreach programs</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mt-6 mb-4 text-gray-800">Our Team</h2>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          Meet our dedicated team of leaders who make it all possible:
+      </div>
+
+      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
+        Our Mission
+      </h1>
+
+      <div className="bg-white mt-2 p-5">
+        <p className="text-xl mb-5">
+          Our mission is to cultivate an inclusive and vibrant campus community
+          by providing diverse opportunities for student engagement, personal
+          development, and leadership. Through a wide range of clubs and
+          organizations, we strive to support the interests and passions of all
+          students, fostering a sense of belonging, collaboration, and lifelong
+          learning.
         </p>
-        <ul className="list-disc list-inside text-gray-700 mb-4">
-          <li><strong>John Doe:</strong> President</li>
-          <li><strong>Jane Smith:</strong> Vice President</li>
-          <li><strong>Mark Brown:</strong> Treasurer</li>
-          <li><strong>Lisa White:</strong> Secretary</li>
-          <li><strong>Emma Green:</strong> Event Coordinator</li>
-        </ul>
-        <h2 className="text-2xl font-semibold mt-6 mb-4 text-gray-800">Join Us</h2>
-        <p className="text-gray-700 mb-4 leading-relaxed">
-          We welcome students from all backgrounds and majors to join us. Whether you're looking to expand your skills, meet like-minded peers, or simply try something new, [Club Name] has something for everyone. 
+      </div>
+
+      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
+        Our Vission
+      </h1>
+      <div className="bg-white mt-2 p-5">
+        <p className="text-xl">
+          Our vision is to create a dynamic and supportive environment where
+          every student can thrive and reach their full potential. We aim to be
+          a catalyst for positive change, empowering students to become active,
+          compassionate, and innovative leaders in their communities and beyond.
+          By promoting diversity, creativity, and excellence, we envision a
+          campus where students are inspired to pursue their dreams and make
+          meaningful contributions to society.
         </p>
-        <p className="text-gray-700 leading-relaxed">
-          Thank you for visiting our page! We look forward to seeing you at our next meeting or event. Stay connected with us through our social media channels and keep an eye on our event calendar for upcoming activities.
+      </div>
+
+      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
+          Join Us
+        </h1>
+      <div className="bg-white mt-2 p-5">
+        <p className="text-xl">
+          We welcome students from all backgrounds and majors to join us.
+          Whether you're looking to expand your skills, meet like-minded peers,
+          or simply try something new, [Club Name] has something for everyone.
+        </p>
+        <p className="text-xl">
+          Thank you for visiting our page! We look forward to seeing you at our
+          next meeting or event. Stay connected with us through our social media
+          channels and keep an eye on our event calendar for upcoming
+          activities.
         </p>
       </div>
     </div>
@@ -47,5 +86,3 @@ const About = () => {
 };
 
 export default About;
-
-

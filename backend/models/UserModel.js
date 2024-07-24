@@ -22,7 +22,11 @@ const userSchema = new Schema({
     contact:{
         type:Number,
         required:true
+    },
+    role:{
+        type:String,
+        default: "user"
     }
 })
 
-module.exports =  model('User', userSchema);
+module.exports =  model('user', userSchema);

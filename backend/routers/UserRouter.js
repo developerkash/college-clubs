@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Model = require('../Models/userModel');
+const Model = require('../models/UserModel');
 
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
@@ -57,8 +57,8 @@ router.post('/authenticate', (req, res) => {
     Model.findOne(req.body)
         .then((result) => {
             if (result) {
-                const { _id, first_name,last_name, email } = result;
-                const payload = { _id, first_name,last_name, email };
+                const { _id, first_name,last_name, email, role } = result;
+                const payload = { _id, first_name,last_name, email, role };
                 jwt.sign(
                     payload,
                     process.env.JWT_SECRET,
@@ -69,7 +69,7 @@ router.post('/authenticate', (req, res) => {
                             console.log(err);
                             res.status(500).json({ message: 'error creating token' })
                         } else {
-                            res.status(200).json({ token, first_name,last_name })
+                            res.status(200).json({ token, first_name,last_name,role })
                         }
 
                     }
