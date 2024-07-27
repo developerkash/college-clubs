@@ -2,9 +2,9 @@ import React from "react";
 
 const About = () => {
   return (
-    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 mt-12">
-      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
-        About Our Club
+    <div className="min-h-screen bg-gray-100 flex flex-col items-center justify-center p-4 mt-12 bg-orange-200 ">
+        <h1 className="text-2xl  top-0 w-fit h-auto py-4 text-center flex bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl font-extrabold text-transparent  select-auto font-bold  mb-5  p-5">
+        About Our Community
       </h1>
 
       <div className="bg-white mt-2 p-5">
@@ -35,8 +35,8 @@ const About = () => {
         </p>
       </div>
 
-      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
-        Our Mission
+      <h1 className="text-2xl  top-0 w-fit h-auto py-4 text-center flex bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl font-extrabold text-transparent  select-auto font-bold  mb-5  p-5">
+      Our Mission
       </h1>
 
       <div className="bg-white mt-2 p-5">
@@ -50,8 +50,8 @@ const About = () => {
         </p>
       </div>
 
-      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
-        Our Vission
+      <h1 className="text-2xl  top-0 w-fit h-auto py-4 text-center flex bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl font-extrabold text-transparent  select-auto font-bold  mb-5  p-5">
+      Our Vission
       </h1>
       <div className="bg-white mt-2 p-5">
         <p className="text-xl">
@@ -65,8 +65,8 @@ const About = () => {
         </p>
       </div>
 
-      <h1 className="text-4xl font-bold mb-2 text-center text-gray-800 ">
-          Join Us
+      <h1 className="text-2xl  top-0 w-fit h-auto py-4 text-center flex bg-gradient-to-r items-center from-blue-500 via-teal-500 to-pink-500 bg-clip-text text-6xl font-extrabold text-transparent  select-auto font-bold  mb-5  p-5">
+      Join Us
         </h1>
       <div className="bg-white mt-2 p-5">
         <p className="text-xl">

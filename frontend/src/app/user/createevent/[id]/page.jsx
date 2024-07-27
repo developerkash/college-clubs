@@ -35,11 +35,11 @@ const EventPage = () => {
       contactEmail: "",
       contactPhone: "",
 
-      //Admin-Specific Fields
-      visibility: "Public",
-      approvalStatus: "Pending Approval",
-      eventStatus: "Active",
-      adminNotes: "",
+    //   //Admin-Specific Fields
+    //   visibility: "Public",
+    //   approvalStatus: "Pending Approval",
+    //   eventStatus: "Active",
+    //   adminNotes: "",
     },
     onSubmit: async (values, action) => {
       console.log(values);
@@ -333,7 +333,7 @@ const EventPage = () => {
           </div>
 
           {/* Admin-Specific Fields */}
-          <div className="bg-indigo-50 p-5 mt-5">
+          {/* <div className="bg-indigo-50 p-5 mt-5">
             <h1 className="text-xl font-bold mb-4">Admin-Specific Fields</h1>
             <div className="mb-4">
               <label className="block text-sm font-medium text-gray-700">
@@ -390,7 +390,7 @@ const EventPage = () => {
                 className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
               />
             </div>
-          </div>
+          </div> */}
 
           {/* Submit */}
           <div className="flex items-center justify-center">

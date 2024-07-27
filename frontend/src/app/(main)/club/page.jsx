@@ -2,31 +2,37 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
+
 const Clubs = () => {
   const [clubs, setClubs] = useState([]);
+  const [visibleClubs, setVisibleClubs] = useState({
+    "Academic and Professional Clubs": 4,
+    "Arts and Culture Clubs": 4,
+    "Political and Advocacy Clubs": 4,
+    "Social and Community Service Clubs": 4,
+    "Sports and Recreation Clubs": 4,
+    "Technology and Innovation Clubs": 4,
+  });
+
 
   const fetchClubs = () => {
     fetch("http://localhost:5000/club/getall")
-      .then((response) => {
-        console.log(response.status);
-        return response.json();
-      })
-      .then((data) => {
-        console.log(data);
-        setClubs(data);
-      })
-      .catch((err) => {
-        console.error("Error:", err);
-      });
+      .then((response) => response.json())
+      .then((data) => setClubs(data))
+      .catch((err) => console.error("Error:", err));
   };
+
 
   useEffect(() => {
     fetchClubs();
   }, []);
 
+
   const renderClubsByType = (type) => {
+    const visibleCount = visibleClubs[type];
     return clubs
       .filter((club) => club.club_type === type)
+      .slice(0, visibleCount)
       .map((club) => (
         <div
           key={club._id}
@@ -66,77 +72,48 @@ const Clubs = () => {
       ));
   };
 
+
+  const toggleViewMore = (type) => {
+    setVisibleClubs((prev) => ({
+      ...prev,
+      [type]: prev[type] === 4 ? clubs.filter((club) => club.club_type === type).length : 4,
+    }));
+  };
+
+
+  const clubSections = [
+    "Academic and Professional Clubs",
+    "Arts and Culture Clubs",
+    "Political and Advocacy Clubs",
+    "Social and Community Service Clubs",                      
+    "Sports and Recreation Clubs",
+    "Technology and Innovation Clubs",
+  ];
+
+
   return (
-    <>
-      <section className="bg-amber-100 mt-15 pt-8 min-h-screen">
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
+    <section className="bg-white mt-20 ">
+      {clubSections.map((section) => (
+        <div key={section} className="bg-orange-200 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
           <div>
-            <h2 className="text-2xl block font-bold ">
-              Academic and Professional Clubs
-            </h2>
+            <h1 className="text-4xl font-bold text-center  p-5 bg-gradient-to-r from-blue-600 via-green-500 to-indigo-400  text-transparent bg-clip-text">{section}</h1>
           </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Academic and Professional Clubs")}
+          <div className="bg-orenge-200 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-4 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
+            {renderClubsByType(section)}
           </div>
+          <button
+            onClick={() => toggleViewMore(section)}
+            className="text-blue-700 hover:text-blue-900 text-4xl font-semibold mt-4 "
+          >
+            {visibleClubs[section] === 3 ? "View More" : "View Less"}
+          </button>
         </div>
-
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
-          <div>
-            <h2 className="text-2xl block font-bold ">
-              Arts and Culture Clubs
-            </h2>
-          </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Arts and Culture Clubs")}
-          </div>
-        </div>
-
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
-          <div>
-            <h2 className="text-2xl block font-bold ">
-              Political and Advocacy Clubs{" "}
-            </h2>
-          </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Political and Advocacy Clubs")}
-          </div>
-        </div>
-
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
-          <div>
-            <h2 className="text-2xl block font-bold ">
-              Social and Community Service Clubs
-            </h2>
-          </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Social and Community Service Clubs")}
-          </div>
-        </div>
-
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
-          <div>
-            <h2 className="text-2xl block font-bold ">
-              Sports and Recreation Clubs{" "}
-            </h2>
-          </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Sports and Recreation Clubs")}
-          </div>
-        </div>
-
-        <div className="bg-blue-500 m-5 p-5 w-fit mx-auto text-center justify-items-center justify-center gap-y-20 gap-x-14">
-          <div>
-            <h2 className="text-2xl block font-bold ">
-              Technology and Innovation Clubs
-            </h2>
-          </div>
-          <div className="bg-blue-500 m-5 p-5 w-fit mx-auto grid grid-cols-1 lg:grid-cols-3 md:grid-cols-2 justify-items-center justify-center gap-y-20 gap-x-14 pt-8 mb-5">
-            {renderClubsByType("Technology and Innovation Clubs")}
-          </div>
-        </div>
-      </section>
-    </>
+      ))}
+    </section>
   );
 };
 
+
 export default Clubs;
+
+

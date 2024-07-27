@@ -1,4 +1,5 @@
 "use client";
+import Link from "next/link";
 import { useParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
@@ -64,8 +65,16 @@ const ViewClub = () => {
                 </div>
                 <div className="w-1/4">
                   <div className="flex justify-end m-2">
-                    <button className="bg-blue-500 text-white px-4 py-2 rounded-lg ">
-                      Join Club
+                    <button
+                      type="button"
+                      className="bg-blue-500 text-white px-4 py-2 rounded-lg "
+                    >
+                      <Link
+                        href={`/user/joinclub/${clubData._id}`}
+                        className="text-white  text-sm font-semibold"
+                      >
+                        Join Club
+                      </Link>
                     </button>
                   </div>
                 </div>
