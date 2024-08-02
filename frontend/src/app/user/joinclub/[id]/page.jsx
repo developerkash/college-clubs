@@ -17,27 +17,31 @@ const JoinClubForm = () => {
       console.log(values);
 
       try {
-        const res = await fetch("http://localhost:5000/joinclub/add", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+        const response = await fetch('http://localhost:5000/joinclub/add', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(values),
         });
 
-        if (res.status === 200) {
-          const data = await res.json(); // Extract the JSON data from the response
-          const userId = data._id; // Ensure the response contains the correct ID
+        if (!response.ok) {
+          const errorData = await response.json();
+          console.error('Error:', errorData);
+          toast.error('Failed to join the club');
+          return;
+        }
 
-          toast.success("Club joined successfully");
-          router.push(`/user/userpage/${userId}`); // Use the correct ID for redirection
-          // action.resetForm();
+        const data = await response.json();
+        if (data._id) {
+          toast.success('Club joined successfully');
+          router.push(`/club/${data._id}`);
         } else {
-          toast.error("Failed to join the club");
+          toast.error('User ID is missing in the response');
         }
       } catch (error) {
-        toast.error("An error occurred while joining the club");
-        console.error("Error:", error);
+        console.error('Network error:', error);
+        toast.error('Failed to connect to the server. Please try again later.');
+      } finally {
+        action.setSubmitting(false);
       }
     },
   });

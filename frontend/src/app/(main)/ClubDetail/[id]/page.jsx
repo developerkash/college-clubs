@@ -86,17 +86,17 @@ const ViewClub = () => {
                 <h2 className="text-3xl font-bold mb-4">Gallery</h2>
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
                   <img
-                    src="../image1.jpg"
+                    src="../../image1.jpg"
                     alt="Event 1"
                     className="w-full h-full object-cover"
                   />
                   <img
-                    src="../image2.jpg"
+                    src="../../image2.jpg"
                     alt="Event 2"
                     className="w-full h-full object-cover"
                   />
                   <img
-                    src="../image3.jpg"
+                    src="../../image3.jpg"
                     alt="Event 3"
                     className="w-full h-full object-cover"
                   />

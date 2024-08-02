@@ -8,7 +8,7 @@ const UserNavbar = () => {
       <nav className="fixed top-0 w-full  bg-red-700 py-2.5 dark:bg-gray-900">
         <div className="px-3 py-3 lg:px-5 lg:pl-3">
           <div className="flex flex-row items-center justify-between  px-4 mx-auto">
-            <img src="../Design.jpg" className="h-6 mr-3 sm:h-9" alt="Logo" />
+            <img src="/Design.jpg" className="h-6 mr-3 sm:h-9" alt="Logo" />
 
             <div
               className="items-center justify-center w-full lg:flex lg:w-auto lg:order"
