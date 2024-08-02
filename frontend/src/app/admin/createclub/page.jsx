@@ -39,6 +39,7 @@ const CreateClub = () => {
 
     const fd = new FormData();
     fd.append("myfile", file);
+<<<<<<< HEAD
 
     fetch("http://localhost:5000/util/uploadfile", { method: "POST", body: fd })
       .then((response) => {
@@ -55,6 +56,17 @@ const CreateClub = () => {
         console.log(err);
         toast.error("some error occured");
       });
+=======
+    fetch("http://localhost:5000/util/uploadfile", {
+      method: "POST",
+      body: fd,
+    }).then((res) => {
+      if (res.status == 200) {
+        console.log("File Uploaded Successfully");
+        createnewclub.values.image = file.name;
+      }
+    });
+>>>>>>> e0b00f39f16aaa673b36cf7a41745f36a9616381
   };
 
   return (
@@ -188,13 +200,18 @@ const CreateClub = () => {
                 </div>
                 <div className="mt-2">
                   <label
-                    htmlFor="file_upload"
+                    htmlFor="image"
                     className=" text-sm font-semibold leading-6 text-gray-900 pr-5 "
                   >
                     Upload File
                   </label>
                   <input
                     type="file"
+<<<<<<< HEAD
+=======
+                    name="image"
+                    id="image"
+>>>>>>> e0b00f39f16aaa673b36cf7a41745f36a9616381
                     required
                     onChange={uploadFile}
                   />

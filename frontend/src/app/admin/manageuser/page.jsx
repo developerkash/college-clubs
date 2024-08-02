@@ -76,7 +76,7 @@ const ManageUser = () => {
           Password
         </th>
         <th scope="col" className="px-3 py-3">
-          <span className="sr-only">Delete</span>
+          <span className="">Action</span>
         </th>
       </tr>
     </thead>

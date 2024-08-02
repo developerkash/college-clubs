@@ -3,9 +3,14 @@ import React from "react";
 import { useFormik } from "formik";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import toast from "react-hot-toast";
+import { useRouter } from "next/navigation";
+import useAppContext from "@/context/AppContext";
 
 const Login = () => {
-  
+  const { setCurrentUser,setLoggedIn } = useAppContext();
+
+const router = useRouter()
+
   const loginuser = useFormik({
     initialValues: {
       email: '',
@@ -30,18 +35,27 @@ const Login = () => {
 
         const data = await res.json();
         console.log(data);
-        sessionStorage.setItem('user', JSON.stringify(data));
         setLoggedIn(true);
         setCurrentUser(data);
+        // sessionStorage.setItem('user', JSON.stringify(data));
+        sessionStorage.setItem('isloggedin', true )
+        if ( data.role === 'admin') {
+          sessionStorage.setItem('admin', JSON.stringify(data));
+          router.push('admin/dashboard')
+        } else {
+          sessionStorage.setItem('user', JSON.stringify(data));
+          setLoggedIn(true);
+          toast.success('user loggein successully');
+          router.push('/')
+        } 
         action.resetForm();
-        router.push('/');
+
       }
-      else if (res.status === 401) {
-        toast.error("Invalid Credentials")
+      else {
+        toast.error('failed to loggedin')
       }
 
     },
-    // validationSchema: LoginSchema
 
   })
 
