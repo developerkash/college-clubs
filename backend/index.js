@@ -8,6 +8,7 @@ const utilRouter = require('./routers/utils');
 const ContactRouter = require('./routers/ContactRouter');
 const EventRouter = require('./routers/EventRouter');
 const AnnouncementsRouter = require('./routers/AnnouncementsRouter')
+const JoinClubRouter = require('./routers/JoinClubRouter');
 
 
 app.use(express.json());            
@@ -27,6 +28,7 @@ app.use('/contact',ContactRouter);
 app.use('/event',EventRouter);
 app.use('/announcements',AnnouncementsRouter)
 app.use(express.static('./uploads')); 
+app.use('/joinclub',JoinClubRouter);
 
 
 // Starting the server on the specified port.

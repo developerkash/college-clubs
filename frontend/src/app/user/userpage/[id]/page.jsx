@@ -3,9 +3,10 @@ import React from "react";
 import Link from "next/link";
 
 const UserPage = () => {
+
   return (
-    <div>
-      <div className="bg-amber-100  py-8">
+    <div className=" mt-16">
+      <div className="bg-amber-100  py-8 mt-16">
         <div className="max-w-12xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-row text-center justify-between bg-white">
             <div className="w-1/4">
@@ -36,6 +37,8 @@ const UserPage = () => {
                   type="button"
                   className="bg-blue-500 text-white px-4 py-2 rounded-lg "
                 >
+
+                  {/* link by id */}
                   <Link
                     href="#"
                     className="text-white  text-sm font-semibold"
