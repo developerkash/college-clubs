@@ -35,8 +35,28 @@ const CreateClub = () => {
 
   const uploadFile = (e) => {
     const file = e.target.files[0];
+    console.log(file);
+
     const fd = new FormData();
     fd.append("myfile", file);
+<<<<<<< HEAD
+
+    fetch("http://localhost:5000/util/uploadfile", { method: "POST", body: fd })
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("file Uploaded");
+          response.json().then((data) => {
+            createnewclub.values.images[0] = file.name;
+          });
+        } else {
+          toast.success("some error occured");
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        toast.error("some error occured");
+      });
+=======
     fetch("http://localhost:5000/util/uploadfile", {
       method: "POST",
       body: fd,
@@ -46,6 +66,7 @@ const CreateClub = () => {
         createnewclub.values.image = file.name;
       }
     });
+>>>>>>> e0b00f39f16aaa673b36cf7a41745f36a9616381
   };
 
   return (
@@ -186,10 +207,12 @@ const CreateClub = () => {
                   </label>
                   <input
                     type="file"
+<<<<<<< HEAD
+=======
                     name="image"
                     id="image"
+>>>>>>> e0b00f39f16aaa673b36cf7a41745f36a9616381
                     required
-                    aria-describedby="file_upload_details"
                     onChange={uploadFile}
                   />
                 </div>
