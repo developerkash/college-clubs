@@ -35,7 +35,7 @@ const JoinClubForm = () => {
 
         if (data._id) {
           toast.success('Club joined successfully');
-          router.push(`/userpage/${data._id}`);
+          router.push(`/user/userpage/${data._id}`);
         } else {
           toast.error('User ID is missing in the response');
         }

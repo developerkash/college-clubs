@@ -3,7 +3,7 @@ const { Schema, model } = require('mongoose');
 const joinclubSchema = new Schema({
     
     user_name: {
-        type: Number,
+        type: String,
         required: true
     },
     user_email: {
